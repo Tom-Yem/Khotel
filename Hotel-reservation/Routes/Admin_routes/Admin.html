@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ADMINSTRATOR</title>
+    <style>
+      html{
+      background-image:url('/static/hotel.jpg');
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-size: cover; 
+      }  
+      body{
+      margin:0;
+      
+      }
+      form{
+      margin:12px;
+      color: whitesmoke;
+      }
+      #head{
+       position:sticky;
+       left:0;
+       top:0;
+       padding:12px;
+       background-color: brown;
+      }
+      #modify,#reserved{
+       padding:12px;
+       cursor: pointer;
+       color:whitesmoke;
+       text-decoration: none;
+       background-color: black; 
+      }
+    </style>
+</head>
+<body>
+  <div id="head">
+    <a href="/Admin/modify" id="modify">Modify</a>
+    <a href="/Admin/reserved" id="reserved">Reserved Rooms</a>
+  </div>
+   <form action="/book/search" method="POST">
+     Check-in<input type="date" name="check_in" id="check-in" required>
+     Days <input id="numDays" oninput="setChckout()" type="number" min="1">
+     Check-out<input type="date" name="check_out" id="check-out">
+     <select name='options'>
+       <option value="Single">Single</option>
+       <option value="Double">Double</option>
+       <option value="Family">Family</option>
+     </select>
+     <input type="submit" value="Search" name="search">
+   </form>
+   <script>
+    document.getElementById('check-in').min = JSON.stringify(new Date()).substring(1,11);
+    let Today = new Date();
+    Today.setDate(Today.getDate()+1);
+    document.getElementById('check-out').min = JSON.stringify(Today).substring(1,11); 
+    
+    let chckin = document.getElementById('check-in');
+    chckin.onchange = function(){
+      let date = new Date(chckin.value);
+      date.setDate(date.getDate()+1);
+      document.getElementById('check-out').value = JSON.stringify(date).substring(1,11);
+    }
+    let setChckout = function(){
+      let days = +document.getElementById('numDays').value;
+      let nwDate = new Date(document.getElementById('check-in').value);
+      let chckout = nwDate.setDate(nwDate.getDate() + days);
+      chckout = JSON.stringify(nwDate);
+      document.getElementById('check-out').value = chckout.substring(1,11);
+    }
+   </script>
+</body>
+</html>

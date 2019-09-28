@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <style>
+      html{
+      background-image:url('/static/hotel.jpg');
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-size: cover;  
+      }
+      body{
+      margin:0; 
+      }
+      form{
+      margin:12px;
+      color: whitesmoke;
+      }
+      #head{
+       position:sticky;
+       left:0;
+       top:0;
+       background-color: brown;
+       padding:12px;
+      }
+      #modal-opener{
+       position: relative; 
+       left:84%;
+       color:whitesmoke;
+       padding:12px;
+       cursor: pointer;
+       background-color: black; 
+      }
+      #modify,#reserved{
+       display:none; 
+       padding:12px;
+       cursor: pointer;
+       color:whitesmoke;
+       text-decoration: none;
+      }
+      #Modal{
+       display:none; 
+       position: fixed;
+       width: 100%;
+       height: 100%;
+       left: 0;
+       top: 0;
+       overflow: auto;
+       background-color: rgba(0, 0, 0, 0.582);
+      }
+      #modal-content{
+       background-color: #fefefeea;
+       margin: auto;
+       width: 40%;
+       padding: 20px;
+       border:10px inset salmon;
+       border-radius: 15px; 
+      }
+      #sign{
+        padding:12px; 
+        outline:none; 
+        border-radius:12px; 
+        margin-top:10px; 
+        width:100%; 
+        text-align: center;
+        font-size: 15px;
+        font-weight:bolder;
+        background-color:rgb(14, 130, 134);
+      }
+     
+      .closer{
+       color: #aaaaaa;
+       font-size: 28px;
+       float:right;
+       font-weight: bold; 
+      }
+      .closer:hover,
+      .closer:focus{
+       color:#000;
+       cursor: pointer;
+       text-decoration: none;
+       }
+       @keyframes animate-open{
+         0%{ 
+          padding-top:0;
+         }
+         100%{
+          padding-top:50px;
+         }
+       }
+    </style>
+</head>
+<body>
+  <div id="head">
+    <a id="modal-opener">Sign-in</a>
+  </div>
+  <h2 style='margin-top:0; color:wheat;text-align:center; background-color:rgb(65, 93, 84) '>HOTEL KABEE</h2>
+   <form action="/book/search" method="POST">
+     Check-in<input type="date" name="check_in" id="check-in" required>
+     Days <input id="numDays" oninput="setChckout()" type="number" min="1">
+     Check-out<input type="date" name="check_out" id="check-out">
+     <select name='options'>
+       <option value="Single">Single</option>
+       <option value="Double">Double</option>
+       <option value="Family">Family</option>
+     </select>
+     <input type="submit" value="Search" name="search">
+   </form>
+   
+    <div id="Modal">
+       <div id="modal-content">
+        <span class="closer">&times;</span>
+        <h3>Sign-in!</h3>
+        <hr>
+        <h5 style="font-family:cursive;font-size:20px;text-align: center;">This is for admin only!</h5>
+        <h4> Password</h4>
+        <input id='password' type="password" placeholder="hint:1234">
+        <button id="sign">Sign-in</button>
+
+       </div>
+
+    </div>
+    
+   <script>
+    document.getElementById('check-in').min = JSON.stringify(new Date()).substring(1,11);
+    let Today = new Date();
+    Today.setDate(Today.getDate()+1);
+    document.getElementById('check-out').min = JSON.stringify(Today).substring(1,11); 
+    
+    let chckin = document.getElementById('check-in');
+    chckin.onchange = function(){
+      let date = new Date(chckin.value);
+      date.setDate(date.getDate()+1);
+      document.getElementById('check-out').value = JSON.stringify(date).substring(1,11);
+    }
+
+    let setChckout = function(){
+      let days = +document.getElementById('numDays').value;
+      let nwDate = new Date(document.getElementById('check-in').value);
+      let chckout = nwDate.setDate(nwDate.getDate() + days);
+      chckout = JSON.stringify(nwDate);
+      document.getElementById('check-out').value = chckout.substring(1,11);
+    }
+    
+    let modal = document.getElementById('Modal');
+    let modalBtn = document.getElementById('modal-opener');
+    let closer = document.getElementsByClassName('closer')[0];
+    
+    modalBtn.onclick = function(){
+      modal.style.display = 'block';
+      modal.style.animation = 'animate-open 0.2s linear';
+      modal.style.animationFillMode = 'forwards';
+    } 
+    closer.onclick = function(){
+      modal.style.display = 'none';
+      
+    }
+    window.onclick = function(event){
+      if(event.target == modal){
+        modal.style.display = 'none';
+      }
+    }
+    let signBtn = document.getElementById('sign');
+    signBtn.onclick = function(){
+      let password = document.getElementById('password');
+      if(password.value == '1234'){
+        window.location = '/Admin';
+    }
+  }
+   </script>
+</body>
+</html>

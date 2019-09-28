@@ -1,0 +1,58 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(http-equiv='X-UA-Compatible' content='ie=edge')
+  title Reserved
+  style.
+    table{
+    background-color:rgb(34, 124, 133);
+    margin-top:20px;
+    }
+    caption{
+     font-family: fantasy;
+     font-size:30px;
+     background-color:rgb(136, 15, 52);
+     color:rgba(255, 255, 255, 0.8);
+    }
+    table, th, td {
+    border: 1px solid black;
+    border-collapse:collapse;
+    }
+    td:hover,th:hover{
+    background-color:rgb(3, 69, 75);    
+    }
+    th, td {
+    text-align:center;
+    color:white;
+    padding:25px;
+    }
+    #unreserve{
+    padding:12px;
+    background-color:green;
+    color:white;
+    margin-top:20px;  
+    }
+    #room-num{
+    padding:12px;
+    margin-top:20px;
+    }
+    #reserved-date-container{
+    margin-left:20px;
+    display:inline-block;  
+    }
+form(style='display:inline-block')
+  | Check-in
+  input#check-in(type='date')
+  | Check-out
+  input#check-out(type='date')
+button#btn(onclick='showReserved()') Search
+button#unreserve(style='margin-left:100px' onclick='unreserveRoom()') Unreserve
+input#room-num(type='number' placeholder='enter room number' min='1') 
+table#table(style='width:100%')
+  caption Reserved-Rooms
+  tr
+    th RoomNumber
+    th Kind     
+script(src='/static/reservedRooms.js')      
+      
