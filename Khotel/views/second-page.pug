@@ -1,0 +1,69 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(http-equiv='X-UA-Compatible' content='ie=edge')
+  link(rel='shortcut icon' href='/static/favicon.ico' type='image/x-icon')
+  link(rel='icon' href='/static/favicon.ico' type='image/x-icon')
+  title Reserve
+  style.
+    html{
+    background-image: url('/static/hotel1.jpg');
+    background-attachment: fixed;
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height:100%;
+    overflow:hidden;
+   }
+   body{
+     margin:0;
+     padding:0;
+     height:100%;
+   }
+    #base-container{  
+    overflow: auto;
+    }
+    .element-container{
+    margin-bottom: 20px;
+    overflow: auto;
+    border-bottom:2px solid black;
+    background-color:rgb(168, 164, 164);
+    }
+    #btn{
+    border: none;
+    background-color:rgb(75, 206, 75);
+    color:white;
+    padding: 10px;
+    outline: none;
+    }
+    #btn:hover{
+      cursor:pointer;
+    }
+    #image{
+    float: left;
+    width: 10%;
+    }
+    @media only screen and (max-width:600;){
+       body{
+         overflow:scroll;
+       }
+    }
+
+  #base-container
+    - const list_rooms=rooms_list 
+    for room in list_rooms
+      .element-container
+        img#image(src='/static/door.jpg' alt='door')
+        h4
+          | Room:#{room.room_number} 
+        span
+        h4
+          | Specials:#{room.specials} 
+        span
+        h4
+          | Price:#{room.price} 
+        span
+        button#btn(class=room.room_number onclick='reserve(event)') Reserve
+script(src='/static/fetchumd')        
+script(src='/static/second-page.js')

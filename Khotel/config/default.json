@@ -1,0 +1,7 @@
+{
+    "db":"mongodb://localhost/Hotel",
+    "privateKey":"key",
+    "appId":"958003311228854",
+    "secretKey":"871ad7c8ede8c27175a989345f66d7d3",
+    "sessionSecret":"tom"
+}

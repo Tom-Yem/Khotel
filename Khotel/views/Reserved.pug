@@ -1,0 +1,96 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(http-equiv='X-UA-Compatible' content='ie=edge')
+  link(rel='shortcut icon' href='/static/favicon.ico' type='image/x-icon')
+  link(rel='icon' href='/static/favicon.ico' type='image/x-icon')
+  title Reserved
+  style.
+    body{
+      background-color:rgb(168, 164, 164);
+    }
+    table{
+    background-color:rgb(34, 124, 133);
+    margin-top:20px;
+    }
+    caption{
+     font-family: fantasy;
+     font-size:30px;
+     background-color:rgb(136, 15, 52);
+     color:rgba(255, 255, 255, 0.8);
+    }
+    table, th, td {
+    border: 1px solid black;
+    border-collapse:collapse;
+    }
+    td:hover,th:hover{
+    background-color:rgb(3, 69, 75);    
+    }
+    th, td {
+    text-align:center;
+    color:white;
+    padding:25px;
+    }
+    #unreserve{
+    padding:12px;
+    background-color:green;
+    color:white;
+    margin-top:20px;
+    margin-left:100px;  
+    }
+    form input,button{
+    padding: 12px;
+    border:none;
+    background-color:lightgray;
+    text-align: center;
+    }
+    button:hover{
+     cursor:pointer;
+    }
+    form+button{
+      margin-left:24px;
+      padding:13px 20px 13px 20px;
+    }
+    label{
+      color:black;
+      font-weight:bolder;
+    }
+    #room-num{
+    padding:12px;
+    margin-top:20px;
+    }
+    #reserved-date-container{
+    margin-left:20px;
+    display:inline-block;  
+    }
+    @media only screen and (max-width:768px){
+      input,button{
+        display:inline-block;
+        width:90%;
+      }
+      #unreserve{ margin-left:0;}
+      form+button{
+        margin-left:0;
+      }
+      button{
+        margin-top:12px;
+        }
+      #room-num{ margin-top:0;}  
+    }
+form(style='display:inline-block')
+  label Check-in
+  input#check-in(type='date')
+  label Check-out
+  input#check-out(type='date')
+button#btn Search
+button#unreserve Unreserve
+input#room-num(type='number' placeholder='enter room number' min='1') 
+table#table(style='width:100%')
+  caption Reserved-Rooms
+  tr
+    th RoomNumber
+    th Kind  
+script(src='/static/fetchumd')       
+script(src='/static/reservedRooms.js')      
+      

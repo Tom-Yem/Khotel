@@ -1,0 +1,7 @@
+{
+    "db":"Kotel_db",
+    "privateKey":"Key",
+    "appId":"ID",
+    "secretKey":"FacebookKey",
+    "sessionSecret":"SesSec"
+}

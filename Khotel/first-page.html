@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Home</title>
+    <style>
+        .wrapper{
+            display: grid;
+            grid-template-columns:1fr;
+            grid-auto-rows: minmax(5em,auto);
+            overflow: hidden;
+        }
+        body{
+           font:15px/1.5 Arial, Helvetica, sans-serif;
+           margin:0;
+           padding: 0;
+       }
+       #box1{
+        background-color:#35424a;
+       }
+       #box1 h1{
+           color:rgb(219, 211, 212);
+           float: left;
+           margin-left:2em;
+           font-weight: bolder;
+       }
+       #box1 a{
+           float: right;
+           font-size:16px;
+           text-transform: uppercase;
+           text-decoration: none;
+           border-left:6px outset #e8491D;
+           border-bottom:6px outset#e8491D;
+           margin-top:30px;
+           color:white;
+           padding:0 12px 0 12px;
+           margin-right: 24px;
+           transition: all 100ms ease-out;
+       }
+       #box1 a:hover{
+        border-left:12px solid #e8491D;
+        cursor: pointer;
+       }
+       #box2{
+        position: relative;
+        background: url('/static/bed-image.jpg') no-repeat -500px -400px;
+        min-height: 400px;  
+       }
+       #box2 div{
+          position: absolute; 
+          left:0;
+          top:0;
+          background-color:rgba(0, 0, 0, 0.5);
+          width:100%;
+          height:100%;
+          text-align: center;
+        }
+        #box2-modal p{
+        font-size: 1.5vmax;
+        margin-top:10%;
+        color:#ddd;
+        text-align:center;
+        font-weight: bolder;
+       }
+       #box2-modal h1{
+         margin-top:-2.5%;  
+         color: rgb(184, 129, 58);  
+         font-weight: bolder;
+         font-size:5vmax;
+       }
+       #box3{
+        background-color:#35424a;
+        text-align: center;
+       }
+       #box3 input,select,button{
+           padding: 12px;
+           background-color:lightgray;
+           text-align: center;
+       }
+       #box3 label{
+           color:lightgray;
+       }
+       #box3 button{
+           background-color:rgb(158, 104, 37);
+           border:none;
+           overflow:auto;
+           color:white;
+       }
+       #box3 button:active{
+        background-color:rgba(158, 104, 37, 0.438);
+       }
+       
+       #box4{
+          text-align: center;
+          font-weight: bolder;
+          background-color:rgb(168, 164, 164);
+       }
+       #box4 span{
+           font-weight: bolder;
+       }
+       #box4 p{
+           width:80%;
+           margin:auto;
+           font-family: Arial, Helvetica, sans-serif;
+       }
+       #box4 h1{
+           font-size:4vmax;
+       }
+       #box4 p{
+           width:80%;
+           margin:auto;
+       }
+       #box4 p::first-letter{
+           font-family: 'Times New Roman', Times, serif;
+           font-size:45px;
+           color:black;
+       }
+       #fig-container{
+           display: grid;
+           grid-template-columns: 1fr 1fr 1fr;
+           
+       }
+       #box5{
+           background-color:#1F262A;
+           text-align: center;
+           color:white;
+        }
+       #box5 a,li{
+            color:white;
+            font-size:16px;
+        }
+        #box5 a:hover{
+            color:lightslategrey;
+        }
+        #box5 div{
+            padding:12px 0 12px 0;
+            border-top:1px solid #e8491D;
+            font-size: 16px;
+        }
+       #Modal{
+       display:none; 
+       position: fixed;
+       width: 100%;
+       height: 100%;
+       left: 0;
+       top: 0;
+       overflow: auto;
+       background-color: rgba(0, 0, 0, 0.582);
+      }
+      #modal-content{
+       background-color:whitesmoke;
+       margin: auto;
+       width: 50%;
+       padding: 20px;
+       border-radius: 15px;
+       overflow: auto; 
+      }
+      #Modal input{
+        display:inline-block;
+        width:50%;
+        margin-left:25%;
+        background-color:rgba(128, 128, 128, 0.322);
+        margin-top:12px;
+        border:none;
+        border-radius: 2em;
+        padding:12px;
+        outline:none;
+      }
+      #sign{
+        padding:12px; 
+        outline:none; 
+        border-radius:2em; 
+        margin-top:10px; 
+        margin-left:25%;
+        width:50%; 
+        text-align: center;
+        font-size: 15px;
+        font-weight:bolder;
+        background-color:rgb(14, 130, 134);
+      }
+     #line{
+       margin-top:20px;
+       width: 100%;
+       border-bottom: 1px solid black;
+       text-align: center;
+       line-height: 0.1em;
+    }
+    #line span{
+      background-color:whitesmoke;
+      padding:0 10px;
+    }
+    i {
+      padding: 10px;
+      text-shadow: 0px 6px 8px rgba(0, 0, 0, 0.6);
+      transition: all ease-in-out 150ms;
+    }
+    i:hover {
+      margin-top: -3px;
+      text-shadow: 0px 14px 10px rgba(0, 0, 0, 0.4);
+    }
+    .closer{
+       color: #aaaaaa;
+       font-size: 28px;
+       float:right;
+       font-weight: bold; 
+    }
+    .closer:hover,
+    .closer:focus{
+       color:#000;
+       cursor: pointer;
+       text-decoration: none;
+    }
+    #error-message{
+      display: none;
+      color:rgb(201, 38, 38);
+      background-color: rgba(196, 96, 96, 0.507);
+      padding:12px;
+    }
+    @media only screen and (max-width:768px){
+        #box3{
+          text-align:left;
+        }
+        #form1{
+          display: grid;
+          grid-template-columns:1fr;
+          justify-items: center; 
+        }
+    }
+    @media only screen and (max-width:600px){
+           #fig-container{
+            grid-template-columns: 1fr;
+           }
+
+    }
+    @keyframes animate-open{
+        0%{ 
+          padding-top:0;
+        }
+        100%{
+          padding-top:2em;
+        }
+    }
+    </style>
+</head>
+<body >
+  <div class="wrapper">
+    <div id="box1">
+      <h1><img src="/static/bedIco.png" alt="no-image"> <i style="color:#e8491D;">KABEE</i> Plaza Hotel</h1>
+      <a id="modal-opener">Sign-in</a>
+       
+  </div>
+  <div id="box2">
+      <div id="box2-modal">
+          <p>WE'RE HERE TO HELP YOU ENJOY YOUR STAY </p> 
+          <h1>DREAM COMES TRUE</h1>
+      </div>
+    </div>
+    <div id="box3">  
+        <form id="form1" action="/book/search" method="POST">
+          
+            <label for="check-in">Check-in</label>
+            <input type="date"  name="check_in" id="check-in" required>
+            <label for="day">Days</label>
+            <input id="numDays" oninput="setChckout()" type="number" min="1">
+            <label for="check-out">Check-out</label>
+            <input type="date" name="check_out" id="check-out">
+            <label for="options">Type</label>
+            <select name='options'>
+                <option value="Single">Single</option>
+                <option value="Double">Double</option>
+                <option value="Family">Family</option>
+            </select>
+            <button type="submit" name="search"><i>Find room</i></button>
+           
+        </form>
+    </div>       
+    <div id="box4">
+        <h1 >Kabee Plaza Hotel</h1>
+        <p>
+          Welcome to our magnificient hotel!We are honored that you have chosen to 
+          stay with us and look forward to providing you with a memorable experience.
+          For all your work troubles and worries to go away,it is no surprise that a vacation
+          is mandatory.And when you enjoy that vacation in a hotel like this,..........it get's way much better! 
+          <br>
+          From a relaxing swimming pool and a warm goofy bed to ectasy fresh weather and clean services
+          we got it all  here! 
+        </p>
+        <div id="fig-container">
+            <figure>
+                <img src="/static/hotel-im1.jpg" width="100%" height="90%" alt="hotel-image">
+                <figcaption>At the swimming pool</figcaption>
+            </figure>
+            <figure>
+                <img src="/static/hotel-im2.jpg" width="100%" height="90%" alt="hotel-image">
+                <figcaption>At the corridor</figcaption>
+            </figure>
+            <figure>
+                <img src="/static/hotel-im3.jpg" width="100%" height="90%" alt="hotel-image">
+                <figcaption>At the night bar</figcaption>
+            </figure>
+            </div>
+        <p>
+            Look,many people loose opportunities because they don't realize one when
+            having it.Same goes to you!
+            Our rooms are always crowdy so better scroll up and reserve a room right now &#128521;. 
+           <br> we are happy to accomodate you for any service you command.
+        </p>
+    </div>
+    <div id="box5">
+        <ul style="list-style-type: none;">
+            <li><a target="_blank" href="https://www.freeprivacypolicy.com/privacy/view/097655e828e09fdc3d54f8dc34eddc35">Privacy Policy</a></li>
+            <br>
+            <li>Contact developer: <br> 
+              <a style="color: #4867AA;" target="_blank" href="https://web.facebook.com/profile.php?id=100010098073891"><i class="fa fa-3x fa-facebook-square"></i></a>  
+            </li>
+        </ul>
+        <div><i>All rights reserved &#169; 2019</i></div>
+    </div>
+  </div>    
+  <div id="Modal">
+    <div id="modal-content">
+        <span class="closer">&times;</span>
+        <h3>Sign-in!</h3>
+        <hr>
+        <p style="font-family:cursive;text-align: center;">This is for admin only!</p>
+        <div id="error-message"></div>
+        <form id="form2">
+          <input name="email" id="email" type="email" placeholder="Email"><br>
+          <input name="password" id="password" type="password" placeholder="Password">
+          <button id="sign">Sign-in</button>
+        </form>
+        <div id="line"><span>or</span></div>
+         <span style="font-weight: bolder;">Sign-in with</span> 
+         <a style="color: #4867AA;"  href="login/facebook"><i class="fa fa-3x fa-facebook-square"></i>
+         </a>
+    </div>
+ 
+   </div>
+   <script defer src="/static/fetchumd"></script>
+   <script>
+        document.getElementById('check-in').min = JSON.stringify(new Date()).substring(1,11);
+        let Today = new Date();
+        Today.setDate(Today.getDate()+1);
+        document.getElementById('check-out').min = JSON.stringify(Today).substring(1,11); 
+        
+        let chckin = document.getElementById('check-in');
+        chckin.onchange = function(){
+          let date = new Date(chckin.value);
+          date.setDate(date.getDate()+1);
+          document.getElementById('check-out').value = JSON.stringify(date).substring(1,11);
+        }
+    
+        let setChckout = function(){
+          let days = +document.getElementById('numDays').value;
+          let nwDate = new Date(document.getElementById('check-in').value);
+          let chckout = nwDate.setDate(nwDate.getDate() + days);
+          chckout = JSON.stringify(nwDate);
+          document.getElementById('check-out').value = chckout.substring(1,11);
+        }
+        
+        let modal = document.getElementById('Modal');
+        let modalBtn = document.getElementById('modal-opener');
+        let closer = document.getElementsByClassName('closer')[0];
+        
+        modalBtn.onclick = async function(){
+          let response = await fetch('/check',{
+            method:'POST',
+            headers:{
+              'Content-Type':'application/json;charset=utf-8'
+            }
+          });
+          if(response.status == 200) return window.location = '/Admin';
+          if(response.status == 400){
+            modal.style.display = 'block';
+            modal.style.animation = 'animate-open 0.2s linear';
+            modal.style.animationFillMode = 'forwards';
+          }
+          
+        } 
+        closer.onclick = function(){
+          modal.style.display = 'none';
+          
+        }
+        window.onclick = function(event){
+          if(event.target == modal){
+            modal.style.display = 'none';
+          }
+        }
+        let signBtn = document.getElementById('sign');
+        signBtn.onclick = async function(e){
+          e.preventDefault();
+          let email = document.getElementById('email').value;
+          let password = document.getElementById('password').value;
+    
+          let response = await fetch('/login',{
+            method:'POST',
+            headers:{
+              'Content-Type':'application/json;charset=utf-8'
+          },
+            body: JSON.stringify({email,password})
+          });
+          if(response.status == 400) {
+            let text = await response.text();
+            let message = document.getElementById('error-message');
+            message.style.display = 'block';
+            message.innerHTML = text;
+          }
+          
+          if(response.status == 200) return window.location = '/';
+      }
+    </script> 
+</body>
+</html>
